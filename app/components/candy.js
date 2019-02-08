@@ -1,12 +1,30 @@
 import { connect } from 'react-redux'
-import React from 'react'
+import React, { Component } from 'react'
+import { getAllCandies } from '../store'
 
-const candy = () => {
-  return (
-    <div>
-      Yo from Candy component
-    </div>
-  )
+
+class Candy extends Component {
+  // constructor(props) {
+  //   super(props)
+  // }
+
+  componentDidMount = () => {
+    this.props.getCandies()
+  }
+
+  
+  render() {
+    
+    const candiesList = this.props.candies.map(candy => {
+      console.log(candy)
+      return candy.name
+    })
+    return (
+      <div>
+        { candiesList }
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -15,4 +33,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(candy)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCandies: () => dispatch(getAllCandies())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Candy)

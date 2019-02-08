@@ -5,19 +5,10 @@ import rootReducer from './reducers'
 import loggingMiddleware from 'redux-logger' // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk' // https://github.com/gaearon/redux-thunk
 
-export default createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(
-    // `withExtraArgument` gives us access to axios in our async action creators!
-    // https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-    thunkMiddleware.withExtraArgument({axios}),
-    loggingMiddleware
-  ))
-)
 
+const GET_ALL_CANDIES = 'GET_ALL_CANDIES'
 
-
-const getAllCandies = () => {
+export const getAllCandies = () => {
   return async dispatch => {
     const response = await axios.get('/api/candies');
     const candies = response.data;
@@ -28,7 +19,6 @@ const getAllCandies = () => {
   }
 }
 
-console.log('yo from store')
 
 const initialState = {
   candies: []
@@ -36,14 +26,24 @@ const initialState = {
 
 export const candiesSubReducer = (state = initialState, action) => {
   switch (action.type) {
-    case getAllCandies: {
+    case GET_ALL_CANDIES: {
       return {
         ...state,
         candies: [...state.candies, action.candies]
       }
     }
     default:
-      return state
+    return state
   }
 }
 
+
+export default createStore(
+  candiesSubReducer,
+  composeWithDevTools(applyMiddleware(
+    // `withExtraArgument` gives us access to axios in our async action creators!
+    // https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
+    thunkMiddleware.withExtraArgument({axios}),
+    loggingMiddleware
+  ))
+)

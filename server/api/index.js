@@ -2,12 +2,12 @@
 
 const router = require('express').Router()
 
-const candy = require('../db/models/Candy')
+const Candy = require('../db/models/Candy')
 
 router.get('/candies', async (req, res, next) => {
   try {
-    const candies = await candy.finAll();
-    res.json(candies);
+    const candies = await Candy.findAll();
+    res.send(candies);
   } catch (error) {
     next(error);
   }
