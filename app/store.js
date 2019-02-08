@@ -14,3 +14,36 @@ export default createStore(
     loggingMiddleware
   ))
 )
+
+
+
+const getAllCandies = () => {
+  return async dispatch => {
+    const response = await axios.get('/api/candies');
+    const candies = response.data;
+    dispatch({
+      type: 'GET_ALL_CANDIES',
+      candies: candies
+    })
+  }
+}
+
+console.log('yo from store')
+
+const initialState = {
+  candies: []
+}
+
+export const candiesSubReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case getAllCandies: {
+      return {
+        ...state,
+        candies: [...state.candies, action.candies]
+      }
+    }
+    default:
+      return state
+  }
+}
+
