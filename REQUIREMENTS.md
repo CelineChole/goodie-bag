@@ -6,7 +6,7 @@ The requirements below are broken into step-by-step instructions, which model th
 
 #### Backend
 
-- [ ] Write a `candies` model with the following information:
+- [x] Write a `candies` model with the following information:
   - [x] name - not empty or null
   - [x] description - not empty or null
   - [x] quantity - cannot exceed 10 of the same candy in your goodie bag - not sure of my syntax
@@ -15,9 +15,9 @@ The requirements below are broken into step-by-step instructions, which model th
 
 #### Frontend
 - [x] Write a candies sub-reducer to manage candies in your Redux store
-- [ ] Write a component to display a list of all candies
-- [ ] Display the all-candies component when the url matches `/candies`
-- [ ] Add links to the navbar that can be used to navigate to the all-candies view and the home view (`/`)
+- [x] Write a component to display a list of all candies
+- [x] Display the all-candies component when the url matches `/candies`
+- [x] Add links to the navbar that can be used to navigate to the all-candies view and the home view (`/`)
 
 Remember to commit early and often as you're working!
 

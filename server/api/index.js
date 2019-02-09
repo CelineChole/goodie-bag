@@ -13,6 +13,26 @@ router.get('/candies', async (req, res, next) => {
   }
 })
 
+router.get('/candies/:id', async (req, res, next) => {
+  try {
+    const candies = await Candy.findById(Number(req.params.id));
+    res.send(candies);
+  } catch (error) {
+    next(error);
+  }
+})
+
+router.put('/candies/:id', async (req, res, next) => {
+  console.log(req.body)
+  try {
+    const candy = await Candy.findById(Number(req.params.id))
+    const updateCandy = await candy.update(req.body)
+    res.send(updateCandy)
+  } catch (error) {
+    next(error)
+  }
+})
+
 
 // Your routes go here!
 // NOTE: Any routes that you put here are ALREADY mounted on `/api`

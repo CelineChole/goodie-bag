@@ -7,21 +7,46 @@ import thunkMiddleware from 'redux-thunk' // https://github.com/gaearon/redux-th
 
 
 const GET_ALL_CANDIES = 'GET_ALL_CANDIES'
+const GET_CANDY_BY_ID = 'GET_CANDY_BY_ID'
+const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
 
 export const getAllCandies = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await axios.get('/api/candies');
     const candies = response.data;
     dispatch({
-      type: 'GET_ALL_CANDIES',
+      type: GET_ALL_CANDIES,
       candies: candies
     })
   }
 }
 
+export const getCandyById = (id) => {
+  return async (dispatch) => {
+    const response = await axios.get(`/api/candies/${id}`)
+    const candy = response.data;
+    dispatch({
+      type: GET_CANDY_BY_ID,
+      candy: candy
+    })
+  }
+}
+
+export const changeQuantity = (id, quantity) => {
+  console.log(id, quantity)
+  return async (dispatch) => {
+    const response = await axios.put(`/api/candies/${id}`, {quantity: quantity})
+    const candy = response.data;
+    dispatch({
+      type: CHANGE_QUANTITY,
+      candy: candy
+    })
+  }
+}
 
 const initialState = {
-  candies: []
+  candies: [],
+  candy: {},
 }
 
 export const candiesSubReducer = (state = initialState, action) => {
@@ -29,7 +54,19 @@ export const candiesSubReducer = (state = initialState, action) => {
     case GET_ALL_CANDIES: {
       return {
         ...state,
-        candies: [...state.candies, action.candies]
+        candies: action.candies
+      }
+    }
+    case GET_CANDY_BY_ID: {
+      return {
+        ...state,
+        candy: action.candy
+      }
+    }
+    case CHANGE_QUANTITY: {
+      return {
+        ...state,
+        candy: action.candy
       }
     }
     default:
