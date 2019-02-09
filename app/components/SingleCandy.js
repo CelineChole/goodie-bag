@@ -22,12 +22,16 @@ class SingleCandy extends Component {
   }
 
   render() {
+
+    const disabled = this.props.candy.quantity === 0 ? true : false
+
     return (
       <div>
         <p>Candy: {this.props.candy.name}</p>
+        <img src={this.props.candy.imageUrl}></img>
         <p>Quantity: {this.props.candy.quantity}</p>
         <p><button onClick={this.handleSubmit} id="increase"type="submit">Increase</button></p>
-        <p><button onClick={this.handleSubmit} id="decrease" type="submit">Decrease</button></p>
+        <p><button onClick={this.handleSubmit} id="decrease" type="submit" disabled={disabled}>Decrease</button></p>
       </div>
     )
   }
