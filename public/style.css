@@ -22,7 +22,7 @@ body::after {
 
 nav {
   align-items: center;
-  background-color: #333333;
+  background-color: peachpuff;
   color: #c0c0c0;
   display: flex;
   height: 80px;
@@ -37,6 +37,6 @@ main {
 }
 
 img {
-  width: 50%;
-  height: 50%
+  width: 40%;
+  height: 40%;
 }

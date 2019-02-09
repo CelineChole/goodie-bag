@@ -9,21 +9,19 @@ const Root = () => {
       <div>
         <nav>
           <NavLink to="/">Goodie Bag</NavLink>
-          <NavLink to="./candies">Candies</NavLink>
+          <NavLink to="./candies" className='candyNav'>Candies</NavLink>
         </nav>
           <Switch>
             <Route exact path="/">
             <main>
               <h1>Welcome to the Goodie Bag!</h1>
-              <NavLink to="./candies">
                 <img src="/candy.jpg"></img>
-              </NavLink>
+              <NavLink to="./candies">Go to the candy box</NavLink>
             </main>
             </Route>
             <Route path="/candies/:id" component={SingleCandy} />
             <Route path="/candies" component={Candy} />Candies
           </Switch>
-        
       </div>
     </HashRouter>
   )
